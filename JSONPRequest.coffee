@@ -8,15 +8,15 @@ exportModule window, "JSONPRequest", ->
   window.callbackbuffer = {}
 
   class JSONPRequest
-    constructor: (@url, callback) ->
-      @exportedName = @generateCallback callback
+    constructor: (@url) ->
       if @url.indexOf "?" < 0
         @url += "?"
       else
         @url += "&"
-      @generateScript()
 
-    send: ->
+    send: (callback) ->
+      @generateScript()
+      @exportedName = @generateCallback callback
       head = document.getElementsByTagName("head")[0]
       head.appendChild @script
     

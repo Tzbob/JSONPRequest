@@ -15,19 +15,19 @@
     window.callbackbuffer = {};
     return JSONPRequest = (function() {
 
-      function JSONPRequest(url, callback) {
+      function JSONPRequest(url) {
         this.url = url;
-        this.exportedName = this.generateCallback(callback);
         if (this.url.indexOf("?" < 0)) {
           this.url += "?";
         } else {
           this.url += "&";
         }
-        this.generateScript();
       }
 
-      JSONPRequest.prototype.send = function() {
+      JSONPRequest.prototype.send = function(callback) {
         var head;
+        this.generateScript();
+        this.exportedName = this.generateCallback(callback);
         head = document.getElementsByTagName("head")[0];
         return head.appendChild(this.script);
       };
