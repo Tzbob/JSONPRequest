@@ -26,8 +26,7 @@
 
       JSONPRequest.prototype.send = function(callback) {
         var head;
-        this.generateScript();
-        this.exportedName = this.generateCallback(callback);
+        this.generateScript(this.generateCallback(callback));
         head = document.getElementsByTagName("head")[0];
         return head.appendChild(this.script);
       };
@@ -48,9 +47,9 @@
         return exportedName;
       };
 
-      JSONPRequest.prototype.generateScript = function() {
+      JSONPRequest.prototype.generateScript = function(exportedName) {
         this.script = document.createElement("script");
-        return this.script.src = "" + this.url + "&callback=window.callbackbuffer." + this.exportedName;
+        return this.script.src = "" + this.url + "&callback=window.callbackbuffer." + exportedName;
       };
 
       return JSONPRequest;
