@@ -15,8 +15,8 @@ exportModule window, "JSONPRequest", ->
         @url += "&"
 
     send: (callback) ->
-      @generateScript()
       @exportedName = @generateCallback callback
+      @generateScript()
       head = document.getElementsByTagName("head")[0]
       head.appendChild @script
     
